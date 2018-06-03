@@ -1,0 +1,22 @@
+The only differences between adv_FGSM.py ande adv_targeted_FGSM.py are:
+
+target_idx      = model.predict(original_array).argmax()
+vs
+target_idx      = model.predict(original_array).argmin()
+
+and
+
+modified_array  = preprocessed_array + perturbation
+vs
+modified_array  = preprocessed_array - perturbation
+
+
+Per the author of codes says:
+for FGSM : 
+# The idea of this method is to take a sample, ask the network to classify it, compute the gradient of the loss in function of the input pixels and update the picture by a small amount in the "direction of the gradient". 
+This direction is opposite to the one that would increase the score for the correct class.
+
+for targeted FGSM: 
+# The idea of this method is to take a sample, ask the network to classify it, compute the gradient of the loss regarding the LEAST probable class in function of the input pixels and update the picture by a small amount in the "opposite direction of the gradient". 
+This direction is towards a wrong class and thus sensible to cause an error in the classification.
+
